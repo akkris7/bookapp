@@ -12,6 +12,8 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("Bookapp API running");
 });
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/test", require("./routes/testRoutes"));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
