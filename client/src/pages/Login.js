@@ -9,15 +9,17 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
       await login(email, password);
       navigate("/");
     } catch {
-      alert("Login failed");
+      setError("Invalid email or password. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -25,12 +27,10 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-[#070c1a] flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Background glow */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-500/8 rounded-full blur-3xl pointer-events-none" />
 
       <div className="w-full max-w-md relative z-10">
-        {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 mb-6">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-xl shadow-emerald-900/50">
@@ -46,7 +46,6 @@ function Login() {
           <p className="text-slate-500 text-sm">Sign in to access your library</p>
         </div>
 
-        {/* Card */}
         <div className="bg-[#0f1629]/80 backdrop-blur-sm border border-white/8 rounded-2xl p-8 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -75,6 +74,12 @@ function Login() {
                 className="w-full bg-[#070c1a] border border-white/8 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-all"
               />
             </div>
+
+            {error && (
+              <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl px-4 py-3 text-rose-400 text-sm">
+                {error}
+              </div>
+            )}
 
             <button
               type="submit"
