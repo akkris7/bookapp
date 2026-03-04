@@ -1,3 +1,4 @@
+const bookRoutes = require("./routes/bookRoutes");
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -16,6 +17,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/test", require("./routes/testRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/library", require("./routes/libraryRoutes"));
+app.use("/api/books", bookRoutes);
 
 
 mongoose.connect(process.env.MONGO_URI)

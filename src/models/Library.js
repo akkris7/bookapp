@@ -16,14 +16,19 @@ const librarySchema = new mongoose.Schema(
     thumbnail: String,
     status: {
       type: String,
-      enum: ["READ", "READING", "WANT_TO_READ"],
+      enum: ["WANT_TO_READ", "READING", "READ"],
       default: "WANT_TO_READ",
+    },
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+    },
+    review: {
+      type: String,
     },
   },
   { timestamps: true }
 );
-
-// Prevent duplicate books per user
-librarySchema.index({ user: 1, bookId: 1 }, { unique: true });
 
 module.exports = mongoose.model("Library", librarySchema);

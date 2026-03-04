@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyLibrary from "./pages/MyLibrary";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BookDetails from "./pages/BookDetails";
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
           element={
             <ProtectedRoute>
               <MyLibrary />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/book/:bookId"
+          element={
+            <ProtectedRoute>
+              <BookDetails />
             </ProtectedRoute>
           }
         />
